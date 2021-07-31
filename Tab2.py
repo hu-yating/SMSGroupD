@@ -28,14 +28,20 @@ na = df_only_na.groupby("PRODUCTION_LINE_NAME").count()["END_DATE"].sort_values(
 fig_na = px.bar(na, x="PRODUCTION_LINE_NAME", y="END_DATE")
 
 def layout():
-    return dbc.Tab(label="Tab2", children=[
+    return dbc.Tab(label="Pre-Processing", children=[
         html.Div([
             html.Div([
                 html.Div([
                     html.Div([
+                        html.Div(children='''
+                Negative Duration Count based on Production Line
+            '''),
                 dcc.Graph(id='neg', figure=fig_neg),
                         ], className="five columns"),
                 html.Div([
+                    html.Div(children='''
+               Missing Values Count based on Production Line
+           '''),
                 dcc.Graph(id='na', figure=fig_na),
                     ], className="five columns"),
                     ], className="row"),

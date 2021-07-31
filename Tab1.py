@@ -7,7 +7,6 @@ import dash_bootstrap_components as dbc
 
 import pandas as pd
 import plotly.express as px
-
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
@@ -41,7 +40,7 @@ dates_list_numbers_marks.pop('remove', None)
     dash.dependencies.Input('timing', 'value'),
 )
 def update_graph(time):
-    sub = df[(df['Date_num'] > time[0]) & (df['Date_num'] < time[-1])]
+    sub = df[(df['Date_num'] >= time[0]) & (df['Date_num'] <= time[-1])]
     agg_weight = sub.groupby(["PRODUCTION_LINE_NAME"])["WEIGHT"].sum().reset_index()
     agg_weight = agg_weight.sort_values(['WEIGHT'], ascending=False)
     small_weight = agg_weight[agg_weight["WEIGHT"] <= 100]
@@ -53,7 +52,7 @@ def update_graph(time):
     dash.dependencies.Input('timing', 'value'),
 )
 def update_graph(time):
-    sub = df[(df['Date_num'] > time[0]) & (df['Date_num'] < time[-1])]
+    sub = df[(df['Date_num'] >= time[0]) & (df['Date_num'] <= time[-1])]
     agg_weight = sub.groupby(["PRODUCTION_LINE_NAME"])["WEIGHT"].sum().reset_index()
     agg_weight = agg_weight.sort_values(['WEIGHT'], ascending=False)
     big_weight = agg_weight[agg_weight["WEIGHT"] > 100]
@@ -69,7 +68,7 @@ def update_output(t):
     return "{} until {}".format(list(start["DATE"])[0], list(end["DATE"])[0])
 
 def layout():
-    return dbc.Tab(label="Tab", children=[
+    return dbc.Tab(label="Weight per Production Line", children=[
         html.Div([
             html.Div([
                 html.Div([
