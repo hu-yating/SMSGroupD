@@ -2,6 +2,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 import warnings
 import Tab1
+import Tab2
 import App
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -22,7 +23,8 @@ app.dash_app.layout = html.Div(
         ),
         dbc.Tabs(style={'fontWeight': 'bold', 'font-size': 24, 'font-family': 'Courier New'},
                  children=[
-                     Tab1.layout()
+                     Tab1.layout(),
+                     Tab2.layout()
                  ])
     ]
 )
